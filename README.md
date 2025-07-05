@@ -1,38 +1,34 @@
-Insurance Quotation API - Coding Challenge
+# Insurance Quotation API - Coding Challenge
+
 This repository contains the backend and frontend solution for a full-stack coding challenge. The application provides a RESTful API to calculate insurance policy quotations based on age, trip duration, and currency. It is built using Laravel 12 and follows modern architectural best practices.
 
-##Project Overview
+# Project Overview
 The core feature is a quotation calculation engine exposed via a secure API endpoint. The project includes:
 
-A RESTful API built with Laravel 12.
+- A RESTful API built with Laravel 12.
 
-JWT-based authentication to secure the API.
+- JWT-based authentication to secure the API.
 
-A robust backend architecture using the Action-Service-Repository pattern.
+- A robust backend architecture using the Action-Service-Repository pattern.
 
-A database seeder to create a default user for testing.
+- A database seeder to create a default user for testing.
 
-A comprehensive test suite using Pest.
+- A comprehensive test suite using Pest.
 
-A simple Blade-based frontend with a login form and a quotation form to demonstrate a real-world API consumption flow.
+- A simple Blade-based frontend with a login form and a quotation form to demonstrate a real-world API consumption flow.
 
-##Technologies & Tools
+# Technologies & Tools
 
-Backend: Laravel 12, PHP 8.2+
+- Backend: Laravel 12, PHP 8.2+
 
-Authentication: tymon/jwt-auth for JSON Web Tokens.
+- Authentication: tymon/jwt-auth for JSON Web Tokens.
 
-Database: MySQL (or your preferred SQL database).
+- Database: MySQL (or your preferred SQL database).
 
-Testing: Pest for feature and unit tests.
-
-Local Development: Instructions provided for both Laravel Sail (Docker) and a native environment (e.g., Laravel Herd, Valet).
-
-##Local Setup Instructions
-You can set up the project using either Laravel Sail (Docker) for a containerized environment or a local PHP environment like Herd.
+- Testing: Pest for feature and unit tests.
 
 
-##Using a Local Environment (Herd/Valet)
+# Using a Local Environment (Herd/Valet)
 
 Clone the Repository
 
