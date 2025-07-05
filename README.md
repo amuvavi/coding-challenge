@@ -1,61 +1,154 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Insurance Quotation API - Coding Challenge
+This repository contains the backend and frontend solution for a full-stack coding challenge. The application provides a RESTful API to calculate insurance policy quotations based on age, trip duration, and currency. It is built using Laravel 12 and follows modern architectural best practices.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+##Project Overview
+The core feature is a quotation calculation engine exposed via a secure API endpoint. The project includes:
 
-## About Laravel
+A RESTful API built with Laravel 12.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+JWT-based authentication to secure the API.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+A robust backend architecture using the Action-Service-Repository pattern.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+A database seeder to create a default user for testing.
 
-## Learning Laravel
+A comprehensive test suite using Pest.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+A simple Blade-based frontend with a login form and a quotation form to demonstrate a real-world API consumption flow.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+##Technologies & Tools
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Backend: Laravel 12, PHP 8.2+
 
-## Laravel Sponsors
+Authentication: tymon/jwt-auth for JSON Web Tokens.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Database: MySQL (or your preferred SQL database).
 
-### Premium Partners
+Testing: Pest for feature and unit tests.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Local Development: Instructions provided for both Laravel Sail (Docker) and a native environment (e.g., Laravel Herd, Valet).
 
-## Contributing
+##Local Setup Instructions
+You can set up the project using either Laravel Sail (Docker) for a containerized environment or a local PHP environment like Herd.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+##Using a Local Environment (Herd/Valet)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Clone the Repository
 
-## Security Vulnerabilities
+``git clone https://github.com/amuvavi/coding-challenge.git``
+``cd coding-challenge``
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Install PHP Dependencies
 
-## License
+``composer install``
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Prepare Environment File
+
+``cp .env.example .env``
+
+Open the ``.env`` file and configure your DB_* variables to match your local database credentials.
+
+Generate Application Key
+
+``php artisan key:generate``
+
+Run Migrations and Seed the Database
+
+``php artisan migrate:fresh --seed --seeder=TestUserSeeder``
+
+Access the Application
+
+The frontend form is available at the URL configured by Herd/Valet (e.g., http://coding-challenge.test).
+
+The API endpoints are available under: http://your-local-domain.test/api/
+
+Database Seeding
+A dedicated seeder is included to create a consistent user for testing.
+
+Test User Credentials:
+
+``Email: tester@example.com``
+
+``Password: password``
+
+To run the seeder manually at any time, use the following command:
+
+# For Local Environment
+``php artisan db:seed --class=TestUserSeeder``
+
+Running Tests
+The project includes a suite of feature and unit tests written with Pest to ensure the API is working correctly.
+
+To run the entire test suite, execute the following command from the project root:
+
+# For Local Environment
+``php artisan test``
+
+The tests cover authentication, validation rules, successful quotation generation, and the core calculation logic.
+
+API Usage Guide (Postman)
+To test the API manually, you must follow the two-step authentication flow.
+
+Step 1: Get an Authentication Token
+First, make a request to the login endpoint to get a JWT.
+
+Method: POST
+
+URL: http://localhost/api/login
+
+Headers:
+
+``Content-Type: application/json``
+
+``Accept: application/json``
+
+Body (raw, JSON):
+``
+{
+    "email": "tester@example.com",
+    "password": "password"
+}
+``
+The response will contain your access_token. Copy it.
+
+Step 2: Call the Protected Quotation Endpoint
+Now, use the token from the login response to make an authorized request.
+
+Method: POST
+
+URL: http://localhost/api/quotation
+
+Headers:
+
+``Content-Type: application/json``
+
+``Accept: application/json``
+
+Authorization: Bearer <paste_your_token_here>
+
+Body (raw, JSON):
+```
+{
+    "age": "28,35",
+    "currency_id": "EUR",
+    "start_date": "2025-10-01",
+    "end_date": "2025-10-30"
+}
+```
+A successful request will return a 200 OK status with the calculated quotation details.
+
+Project Architecture
+The backend is structured using the Action-Service-Repository pattern to ensure a clean separation of concerns:
+
+Controllers: Handle HTTP-level concerns.
+
+Form Requests: Handle validation and authorization.
+
+Actions: Orchestrate single business logic tasks.
+
+Services: Contain reusable, core business logic (e.g., the calculation engine).
+
+Repositories: Abstract the database layer.
+
+API Resources: Transform Eloquent models into consistent JSON responses.
